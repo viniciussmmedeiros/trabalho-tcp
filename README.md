@@ -1,5 +1,5 @@
-## GERADOR DE MÚSICA A PARTIR DE TEXTO
+# GERADOR DE MÚSICA A PARTIR DE TEXTO
 
-# Especificação:
+## Especificação:
 
-# Todo:
+## Todo:
