@@ -2,6 +2,8 @@ package main.java.Classes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class UserInterface extends JFrame{
@@ -46,5 +48,8 @@ public class UserInterface extends JFrame{
         * ser chamada ao clique do botão.
         * OBS: Possivelmente arquivo externo / outra classe. Apenas um placeholder.
         */
+
+        TextHandler textHandler = new TextHandler(text);
+        textHandler.textProcessing();
     }
 }
