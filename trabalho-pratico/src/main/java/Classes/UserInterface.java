@@ -2,9 +2,6 @@ package main.java.Classes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class UserInterface extends JFrame{
     public UserInterface() {
@@ -43,11 +40,6 @@ public class UserInterface extends JFrame{
 
     public static void playMusic(String text) {
         System.out.println(text); // Imprimindo o texto no terminal ao clique do botão, para fins de teste.
-        /*
-        * Aqui a lógica para processamento do texto -> música, deve estar aqui para
-        * ser chamada ao clique do botão.
-        * OBS: Possivelmente arquivo externo / outra classe. Apenas um placeholder.
-        */
 
         TextHandler textHandler = new TextHandler(text);
         textHandler.textProcessing();
