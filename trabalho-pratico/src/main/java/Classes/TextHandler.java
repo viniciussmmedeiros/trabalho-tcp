@@ -19,8 +19,8 @@ public class TextHandler {
         ProcessingMapping mapping = new ProcessingMapping();
         Player player = new Player();
 
-        for(char ch: this.text.toCharArray()) {
-            String jfugueKey = mapping.getMusicalAction((Character.toString(ch)));
+        for(char charInput: this.text.toCharArray()) {
+            String jfugueKey = mapping.getMusicalAction((Character.toString(charInput)));
             player.play(jfugueKey);
         }
     }
