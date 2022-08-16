@@ -8,6 +8,7 @@ import java.awt.*;
 public class GeneratorInterfaceService extends JFrame {
 
     public GeneratorInterfaceService() {
+
         super("Music Generator");
         JTabbedPane tabbedPaneContainer;
         JPanel generatorTab = new JPanel(new GridLayout(3, 3));
@@ -42,7 +43,6 @@ public class GeneratorInterfaceService extends JFrame {
     }
 
     public static void playMusic(String text) {
-        System.out.println(text); // Imprimindo o texto no terminal ao clique do botão, para fins de teste.
 
         GenerateMusicResponse generatorResponse = new GenerateMusicResponse(text);
         generatorResponse.textProcessing();

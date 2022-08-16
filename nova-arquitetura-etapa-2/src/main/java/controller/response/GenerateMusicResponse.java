@@ -8,6 +8,7 @@ public class GenerateMusicResponse {
     private final String text;
 
     public GenerateMusicResponse(String text) {
+
         this.text = text;
     }
 

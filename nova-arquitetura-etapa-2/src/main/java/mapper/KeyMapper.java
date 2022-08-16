@@ -1,62 +1,62 @@
 package mapper;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import enums.KeyLookup;
 
 public class KeyMapper {
-
-    public Map<String, String> textMapping = new HashMap<String, String>();
 
     private final int INITIAL_VOLUME_VALUE = 63;
 
     private int volume = INITIAL_VOLUME_VALUE;
 
-    public KeyMapper() {
+    private String currentNote = "";
 
-        // Key: Fragmento de string retirada do texto input
-        // Value: String correspondente que é reconhecida pelo JFugue
-        this.textMapping.put("A", "A");
-        this.textMapping.put("B", "B");
-        this.textMapping.put("C", "C");
-        this.textMapping.put("D", "D");
-        this.textMapping.put("E", "E");
-        this.textMapping.put("F", "F");
-        this.textMapping.put("G", "G");
-//        this.textMapping.put("a", "");
-//        this.textMapping.put("b", "");
-//        this.textMapping.put("c", "");
-//        this.textMapping.put("d", "");
-//        this.textMapping.put("e", "");
-//        this.textMapping.put("f", "");
-//        this.textMapping.put("g", "");
-    }
-
-    /**
-     * Função que recebe o fragmento de texto do input e retorna
-     * a string reconhecida pelo JFugue.
-     */
     public String getMusicalAction(String textFragment) {
 
         final int VOLUME_MULTIPLICATION_FACTOR = 2;
+        final String pauseOrRepeat = "abcdefg";
+        final String pauseOrRepeatsConsonants = "hjklmnpqrstuvwxyzHJKLMNPQRSTUVWXYZ";
+        final String changeToHarpsichord = "OoUuIi";
+        final String digits = "123456789";
 
-        // Dobra o volume ou retorna ao volume original ao usar " "
+        // Dobra o volume ou retorna ao valor original ao usar " "
         if(textFragment.equals(" ")) {
             if(volume <= INITIAL_VOLUME_VALUE) {
                 volume *= VOLUME_MULTIPLICATION_FACTOR;
-                setVolume(volume);
             } else {
                 volume = INITIAL_VOLUME_VALUE;
-                setVolume(volume);
             }
+            currentNote = "";
             return " ";
+        } else if(textFragment.equals("!")) {
+            // Troca para MIDI #114 (agogo)
+        } else if(textFragment.equals("?")) {
+            // Aumenta uma oitava ou volta para o padrão se não puder aumentar
+        } else if(textFragment.equals(";")) {
+            // Troca para MIDI #76 (Pan Flute)
+        } else if(textFragment.equals(",")) {
+            // Troca para MIDI #20 (Church Organ)
+        } else if(textFragment.equals("CRLF")) {
+            // Troca para MIDI @15 (Tubular Bells)
+        } else if(changeToHarpsichord.contains(textFragment)) {
+            // Troca para MIDI #7 (Harpsichord)
+        } else if(digits.contains(textFragment)) {
+            // Troca para MIDI #Atual+Dígito
         } else {
-            // No JFugue, aumenta-se o ataque das notas com o formato (Nota)(a)(Valor). Ex: Ca50. Onde o máximo valor é 127.
-            return String.format("%sa%d", this.textMapping.get(textFragment), this.volume);
-        }
-    }
+            // Casos das letras mínusculas, consoante exceto nota e ELSE são iguais...
+            if(pauseOrRepeat.contains(textFragment) || pauseOrRepeatsConsonants.contains(textFragment)) {
+                if(!currentNote.isBlank()) {
+                    return currentNote;
+                } else {
+                    return " ";
+                }
+            }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+            return " ";
+        }
+
+        // No JFugue, aumenta-se o ataque das notas com o formato (Nota)(a)(Valor). Ex: Ca50. Onde o valor máximo é 127.
+        currentNote = String.format("%sa%d", KeyLookup.valueOf(textFragment), this.volume);
+
+        return currentNote;
     }
 }
