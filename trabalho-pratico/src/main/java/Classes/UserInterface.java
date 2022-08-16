@@ -35,6 +35,22 @@ public class UserInterface extends JFrame{
         generatorTab.add(musicTextInput);
         generatorTab.add(playMusicButton);
 
+        String data[][]={ {"(letra A ou a)","Nota Lá"},  
+        {"(letra B ou b)","Nota Si"},  
+        {"(letra C ou c) ","Nota Dó"},
+        {"(letra D ou d) ","Nota Ré"},
+        {"(letra E ou e) ","Nota Mi"},
+        {"(letra F ou f) ","Nota Fá"},
+        {"(letra G ou g) ","Nota Sol"},
+        {"Caractere Espaço", "Silêncio ou pausa"}};
+        
+        String column[]={"Texto","Informação Musical ou Ação"};  
+
+        JTable jt = new JTable(data, column);
+        jt.setBounds(30,40,200,300);
+        JScrollPane sp = new JScrollPane(jt);  
+        instructionsTab.add(sp);
+
         setVisible(true);
     }
 
