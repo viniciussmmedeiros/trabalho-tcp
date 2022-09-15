@@ -2,47 +2,74 @@ package mapper;
 
 import enums.KeyLookup;
 
+import static java.lang.Integer.parseInt;
+
 public class KeyMapper {
 
     private final int INITIAL_VOLUME_VALUE = 63;
-
+    private final int PAN_FLUTE = 75;
+    private final int CHURCH_ORGAN = 19;
+    private final int TUBULAR_BELLS = 14;
+    private final int AGOGO = 113;
+    private final int HARPISCHORD = 6;
     private int volume = INITIAL_VOLUME_VALUE;
-
     private String currentNote = "";
+    private int currentInstrument = 1;
+    private int currentOctave = 5;
 
     public String getMusicalAction(String textFragment) {
 
         final int VOLUME_MULTIPLICATION_FACTOR = 2;
+        final int DEFAULT_OCTAVE = 5;
+        final int MAXIMUM_OCTAVE = 10;
         final String pauseOrRepeat = "abcdefg";
         final String pauseOrRepeatsConsonants = "hjklmnpqrstuvwxyzHJKLMNPQRSTUVWXYZ";
         final String changeToHarpsichord = "OoUuIi";
         final String digits = "123456789";
 
-        // Dobra o volume ou retorna ao valor original ao usar " "
         if(textFragment.equals(" ")) {
             if(volume <= INITIAL_VOLUME_VALUE) {
                 volume *= VOLUME_MULTIPLICATION_FACTOR;
             } else {
                 volume = INITIAL_VOLUME_VALUE;
             }
+
             currentNote = "";
             return " ";
         } else if(textFragment.equals("!")) {
-            // Troca para MIDI #114 (agogo)
+            currentInstrument = AGOGO;
+
+            return "I" + currentInstrument;
         } else if(textFragment.equals("?")) {
-            // Aumenta uma oitava ou volta para o padrão se não puder aumentar
+            if(currentOctave < MAXIMUM_OCTAVE) {
+                currentOctave++;
+            } else {
+                currentOctave = DEFAULT_OCTAVE;
+            }
+
+            currentNote = "";
+            return " ";
         } else if(textFragment.equals(";")) {
-            // Troca para MIDI #76 (Pan Flute)
+            currentInstrument = PAN_FLUTE;
+
+            return "I" + currentInstrument;
         } else if(textFragment.equals(",")) {
-            // Troca para MIDI #20 (Church Organ)
-        } else if(textFragment.equals("CRLF")) {
-            // Troca para MIDI @15 (Tubular Bells)
+            currentInstrument = CHURCH_ORGAN;
+
+            return "I" + currentInstrument;
+        } else if(textFragment.equals("\n")) {
+            currentInstrument = TUBULAR_BELLS;
+
+            return "I" + currentInstrument;
         } else if(changeToHarpsichord.contains(textFragment)) {
-            // Troca para MIDI #7 (Harpsichord)
+            currentInstrument = HARPISCHORD;
+
+            return "I" + currentInstrument;
         } else if(digits.contains(textFragment)) {
-            // Troca para MIDI #Atual+Dígito
+            currentInstrument += parseInt(textFragment);
+
+            return "I" + currentInstrument;
         } else {
-            // Casos das letras mínusculas, consoante exceto nota e ELSE são iguais...
             if(pauseOrRepeat.contains(textFragment) || pauseOrRepeatsConsonants.contains(textFragment)) {
                 if(!currentNote.isBlank()) {
                     return currentNote;
@@ -50,12 +77,11 @@ public class KeyMapper {
                     return " ";
                 }
             }
-
-            return " ";
         }
 
         // No JFugue, aumenta-se o ataque das notas com o formato (Nota)(a)(Valor). Ex: Ca50. Onde o valor máximo é 127.
-        currentNote = String.format("%sa%d", KeyLookup.valueOf(textFragment), this.volume);
+        currentNote = String.format("%s%da%d", KeyLookup.valueOf(textFragment), this.currentOctave, this.volume);
+        System.out.println(currentNote);
 
         return currentNote;
     }

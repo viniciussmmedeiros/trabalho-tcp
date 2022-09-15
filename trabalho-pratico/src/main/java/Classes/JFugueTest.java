@@ -12,7 +12,7 @@ public class JFugueTest {
     public static void main(String[] args) {
         Player player = new Player();
 //        Pattern pattern =
-        player.play("T290 C R Da100  R Ea127 R F G A B");
+        player.play("T290 C5a50 C5a50 C6a50 C7a50 C8a50");
         /*
          C = Dó
          D = Ré
