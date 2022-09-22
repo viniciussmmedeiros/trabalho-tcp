@@ -6,8 +6,8 @@ public class InterfaceView extends JFrame {
     // Properties
     JTabbedPane tabbedPaneContainer;
     public PlayerView playerTab = new PlayerView();
-    JPanel instructionsTab = new JPanel();
-    JPanel aboutTab = new JPanel();
+    private InstructionsView instructionsTab = new InstructionsView();
+    private JPanel aboutTab = new JPanel();
 
     // Init
     public InterfaceView() {
