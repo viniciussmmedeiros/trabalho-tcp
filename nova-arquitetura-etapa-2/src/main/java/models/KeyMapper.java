@@ -1,8 +1,8 @@
-package mapper;
-
-import enums.KeyLookup;
+package models;
 
 import static java.lang.Integer.parseInt;
+
+import models.enums.KeyLookup;
 
 public class KeyMapper {
 
