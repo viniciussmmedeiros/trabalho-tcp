@@ -1,4 +1,7 @@
-package service;
+package controller;
+
+import views.InterfaceView;
+import models.GenerateMusicResponse;
 
 /**
  * Funcionamento:
@@ -20,10 +23,16 @@ package service;
  *
  **/
 
-public class UserInterfaceService {
+public class InterfaceController {
 
     public static void main(String[] args) {
+        InterfaceView rootView = new InterfaceView();
+        rootView.playerTab.playMusicButton
+            .addActionListener(click -> playMusic(rootView.playerTab.musicTextInput.getText()));
+    }
 
-        new GeneratorInterfaceService();
+    public static void playMusic(String text) {
+        GenerateMusicResponse generatorResponse = new GenerateMusicResponse(text);
+        generatorResponse.textProcessing();
     }
 }
