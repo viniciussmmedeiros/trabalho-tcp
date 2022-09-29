@@ -2,13 +2,13 @@ package models;
 
 import org.jfugue.player.Player;
 
-public class GenerateMusicResponse {
+public class MusicInputHandler {
 
     private final String text;
     private String textMusic = "";
     private String inputErrorChars = "";
 
-    public GenerateMusicResponse(String text) {
+    public MusicInputHandler(String text) {
         this.text = text;
     }
 
