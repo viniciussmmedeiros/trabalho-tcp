@@ -7,7 +7,7 @@ public class InterfaceView extends JFrame {
     JTabbedPane tabbedPaneContainer;
     public PlayerView playerTab = new PlayerView();
     private InstructionsView instructionsTab = new InstructionsView();
-    private JPanel aboutTab = new JPanel();
+    private JPanel aboutTab = new AboutView();
 
     // Init
     public InterfaceView() {
@@ -17,8 +17,8 @@ public class InterfaceView extends JFrame {
 
     // Setup
     private void setupView() {
-        setSize(500, 500);
-        setLocation(400, 150);
+        setSize(1200, 650);
+        setLocation(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
 
@@ -31,5 +31,4 @@ public class InterfaceView extends JFrame {
 
         setVisible(true);
     }
-
 }

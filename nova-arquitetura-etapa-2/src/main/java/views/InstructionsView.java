@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class InstructionsView extends JPanel {
     // Properties
@@ -36,14 +37,13 @@ public class InstructionsView extends JPanel {
 
     // Init
     public InstructionsView() {
-        super();
+        super(new GridLayout());
         setupView();
     }
 
     // Setup
     private void setupView() {
         JTable mappingTableView = new JTable(instructionsMapping, instructionsMappingColunns);
-        mappingTableView.setBounds(30, 40, 200, 300);
         JScrollPane instructionsScrollView = new JScrollPane(mappingTableView);
         add(instructionsScrollView);
     }
