@@ -18,7 +18,6 @@ public class KeyMapper {
     private int currentOctave = 5;
 
     public String getMusicalAction(String textFragment) {
-
         final int VOLUME_MULTIPLICATION_FACTOR = 2;
         final int DEFAULT_OCTAVE = 5;
         final int MAXIMUM_OCTAVE = 10;
@@ -79,9 +78,7 @@ public class KeyMapper {
             }
         }
 
-        // No JFugue, aumenta-se o ataque das notas com o formato (Nota)(a)(Valor). Ex: Ca50. Onde o valor máximo é 127.
         currentNote = String.format("%s%da%d", KeyLookup.valueOf(textFragment), this.currentOctave, this.volume);
-        System.out.println(currentNote);
 
         return currentNote;
     }
