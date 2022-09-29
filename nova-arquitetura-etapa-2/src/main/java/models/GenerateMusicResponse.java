@@ -6,21 +6,38 @@ public class GenerateMusicResponse {
 
     private final String text;
     private String textMusic = "";
+    private String inputErrorChars = "";
 
     public GenerateMusicResponse(String text) {
         this.text = text;
     }
 
-    public void textProcessing() {
+    public String textProcessing() {
         KeyMapper mapping = new KeyMapper();
-        Player player = new Player();
 
         for (char ch : this.text.toCharArray()) {
-            String jfugueKey = mapping.getMusicalAction((Character.toString(ch)));
+            try {
+                String jfugueKey = mapping.getMusicalAction((Character.toString(ch)));
 
-            textMusic += jfugueKey + " ";
+                textMusic += jfugueKey + " ";
+            } catch(Exception error) {
+                char lastChar = error.getMessage().charAt(error.getMessage().length() - 1);
+
+                if(inputErrorChars.indexOf(lastChar) == -1) {
+                    inputErrorChars += lastChar + " ";
+                }
+            }
         }
 
-        player.play(textMusic);
+        return this.textMusic;
+    }
+
+    public void playTextMusic() {
+        Player player = new Player();
+        player.play(this.textMusic);
+    }
+
+    public String getInputErrorChars() {
+        return this.inputErrorChars;
     }
 }
