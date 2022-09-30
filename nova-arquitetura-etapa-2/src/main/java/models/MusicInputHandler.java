@@ -18,7 +18,7 @@ public class MusicInputHandler {
         for (char ch : this.text.toCharArray()) {
             try {
                 String jfugueKey = mapping.getMusicalAction((Character.toString(ch)));
-
+                System.out.println(jfugueKey);
                 textMusic += jfugueKey + " ";
             } catch(Exception error) {
                 char lastChar = error.getMessage().charAt(error.getMessage().length() - 1);

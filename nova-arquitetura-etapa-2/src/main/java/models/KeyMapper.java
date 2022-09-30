@@ -16,9 +16,9 @@ public class KeyMapper {
     private int volume = INITIAL_VOLUME_VALUE;
     private String currentNote = "";
     private int currentInstrument = 1;
-    final int DEFAULT_OCTAVE = 5;
+    final int DEFAULT_OCTAVE = 4;
     private int currentOctave = DEFAULT_OCTAVE;
-    final int MAXIMUM_OCTAVE = 10;
+    final int MAXIMUM_OCTAVE = 8;
 
     public String getMusicalAction(String textFragment) {
 

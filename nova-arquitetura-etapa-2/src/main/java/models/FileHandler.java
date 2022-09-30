@@ -51,7 +51,7 @@ public class FileHandler {
                 Pattern output = new Pattern(textMusic);
 
                 MidiFileManager.savePatternToMidi(output, file);
-                rootView.playerTab.setMessageArea("File " + fileName + " was saved successfully.");
+                rootView.playerTab.setMessageArea("File " + fileName + ".mid was saved successfully.");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
